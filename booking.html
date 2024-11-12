@@ -1,0 +1,150 @@
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Garden Booking</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Garden Booking</h1>
+	</header>
+	<main>
+		<section>
+			<h2>Book Your Garden</h2>
+			<form id="booking-form">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name"><br><br>
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email"><br><br>
+				<label for="date">Date:</label>
+				<input type="date" id="date" name="date"><br><br>
+				<label for="time">Time:</label>
+				<select id="time" name="time">
+					<option value="9:00 AM">9:00 AM</option>
+					<option value="10:00 AM">10:00 AM</option>
+					<option value="11:00 AM">11:00 AM</option>
+				</select><br><br>
+				<button id="book-btn">Book Now</button>
+			</form>
+		</section>
+	</main>
+	<script src="script.js"></script>
+</body>
+</html>
+
+
+style.css
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+section {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+input, select {
+	width: 100%;
+	height: 40px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+button {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #444;
+}
+
+
+script.js
+
+const form = document.getElementById('booking-form');
+const bookBtn = document.getElementById('book-btn');
+
+bookBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	const name = document.getElementById('name').value;
+	const email = document.getElementById('email').value;
+	const date = document.getElementById('date').value;
+	const time = document.getElementById('time').value;
+
+	// Send data to server or local storage
+	console.log(`Booking confirmed for ${name} on ${date} at ${time}`);
+	alert(`Booking confirmed for ${name} on ${date} at ${time}`);
+});
+
+
+Back-end (Node.js, Express.js)
+
+server.js
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.post('/book', (req, res) => {
+	const { name, email, date, time } = req.body;
+	console.log(`Booking confirmed for ${name} on ${date} at ${time}`);
+	res.send(`Booking confirmed for ${name} on ${date} at ${time}`);
+});
+
+app.listen(port, () => {
+	console.log(`Server started on port ${port}`);
+});
+
+
+Database (MongoDB)
+
+booking.model.js
+
+const mongoose = require('mongoose');
+
+const bookingSchema = new mongoose.Schema({
+	name: String,
+	email: String,
+	date: Date,
+	time: String
+});
+
+const Booking = mongoose.model('Booking', bookingSchema);
+
+module.exports = Booking;
+
+
+This code provides
